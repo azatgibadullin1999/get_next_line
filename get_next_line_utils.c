@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 13:05:31 by larlena           #+#    #+#             */
-/*   Updated: 2020/11/17 14:04:10 by larlena          ###   ########.fr       */
+/*   Updated: 2020/11/18 15:29:51 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,16 @@ void	*ft_memset(void *b, int c, size_t len)
 	return (b);
 }
 
-// size_t	ft_strlen(char *s)
-// {
-// 	return (*s ? (1 + ft_strlen(++s)) : 0);
-// }
+char	*ft_strdup(const char *s1)
+{
+	char	*dst;
+	size_t	end;
+	size_t	i;
+
+	i = 0;
+	end = ft_strlen(s1, '\0') + 1;
+	if ((dst = malloc(sizeof(char) * end)) == NULL)
+		return (NULL);
+	ft_strlcpy(dst, s1, end + 1);
+	return (dst);
+}
