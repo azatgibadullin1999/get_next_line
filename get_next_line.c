@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 12:02:19 by larlena           #+#    #+#             */
-/*   Updated: 2020/11/18 15:30:09 by larlena          ###   ########.fr       */
+/*   Updated: 2020/11/18 16:29:37 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,23 @@ int		get_next_line(int fd, char **line)
 	i = 0;
 	if (str == NULL)
 		str = ft_strdup("");
-	while ((read(fd, fl_buf, BUFFER_SIZE)) )
+	while (!ft_strchr(str, '\n') && (i = read(fd, fl_buf, BUFFER_SIZE)))
+	{
+		if (i == (size_t)-1)
+			return (i);
+		fl_buf[i] = '\0';
+		str = ft_strjoin(str, fl_buf);
+	}
+	if (ft_strchr(str, '\n'))
+	{
+		i = ft_strlen(str, '\n');
+		str[i] = '\0';
+		*line = ft_strdup(str);
+		buf = ft_strdup(&str[i + 1]);
+		free(str);
+		str = buf;
+		return (1);
+	}
 	*line = ft_strdup(str);
 	return (0);
 }
