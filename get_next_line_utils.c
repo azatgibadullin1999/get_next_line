@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 13:05:31 by larlena           #+#    #+#             */
-/*   Updated: 2020/11/20 23:42:00 by larlena          ###   ########.fr       */
+/*   Updated: 2020/11/22 16:36:36 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 		return (0);
 	if (dstsize == 0)
 		return (ft_strlen(src));
-	while (i < dstsize - 1 && src[i])
+	while (i + 1 < dstsize && src[i])
 	{
 		dst[i] = src[i];
 		i++;

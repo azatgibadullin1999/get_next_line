@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 12:02:19 by larlena           #+#    #+#             */
-/*   Updated: 2020/11/20 23:42:00 by larlena          ###   ########.fr       */
+/*   Updated: 2020/11/23 12:47:48 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,18 @@ int		ft_check_str(char **str, char **line)
 		if (!(*line = ft_strdup(*str)))
 			return (-1);
 		free(*str);
-		*str = ft_strdup("");
+		*str = NULL;
 		return (0);
 	}
 }
 
 int		get_next_line(int fd, char **line)
 {
-	size_t		i;
+	int			i;
 	static char	*str;
 	char		buf[BUFFER_SIZE + 1];
 
-	if (BUFFER_SIZE <= 0 || fd < 0)
+	if (BUFFER_SIZE <= 0 || fd < 0 || !line)
 		return (-1);
 	if (!str && !(str = ft_strdup("")))
 		return (-1);
@@ -57,6 +57,8 @@ int		get_next_line(int fd, char **line)
 	{
 		while ((i = read(fd, buf, BUFFER_SIZE)))
 		{
+			if (i == -1)
+				return (-1);
 			buf[i] = '\0';
 			if (!(str = ft_strjoin(&str, buf)))
 				return (-1);
